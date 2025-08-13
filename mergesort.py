@@ -1,9 +1,12 @@
-def merge_sort(array):
-    if len(array) <= 1:
-        return array
-    mid = len(array) // 2
-    left = merge_sort(array[:mid])
-    right = merge_sort(array[mid:])
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
     result = []
     i = j = 0
     while i < len(left) and j < len(right):
@@ -17,7 +20,13 @@ def merge_sort(array):
     result.extend(right[j:])
     return result
 
-input_list = input("Enter numbers, separated by ',': ").split(',')
-value_list = [int(x.strip()) for x in input_list]
-sorted_array = merge_sort(value_list)
-print(sorted_array)
+input_str = input("Enter numbers, separated by ',': ")
+input_list = input_str.split(',')
+try:
+    value_list = [int(x.strip()) for x in input_list]
+    array = merge_sort(value_list)
+    print("input_list:", input_list)
+    print("value_list:", value_list)
+    print("array:", array)
+except ValueError:
+    print("Please enter integers separated by commas.")
